@@ -23,9 +23,9 @@ function n = check_curves(i,j,tmp,from)
                 end
             end
         end
-    else
-        n=1;
+    else    
         if(sum(tmp(i,j,:))<=2)
+            n=1;
             for k=1:8
                 if(k==from),continue;
                 else
@@ -40,7 +40,9 @@ function n = check_curves(i,j,tmp,from)
                     end
                 end
             end
-        end
+        else
+            n=0;
+        end  
     end
 end
 
