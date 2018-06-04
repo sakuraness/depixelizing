@@ -68,12 +68,14 @@ function output = step_one(input)
                 sec=0;
                 %check for islands
                 [fir,sec]=islands(fir,sec,points,tmp);
-                %[fir,sec]=
-                
+                [fir,sec]=sparse_pixels(fir,sec,points,tmp);
+                [fir,sec]=curves(fir,sec,points,tmp);
                 if(fir>=sec)
-                
+                    output(points(2,1),points(2,2),6)=0;
+                    output(points(3,1),points(3,2),3)=0;
                 else
-                    
+                    output(points(1,1),points(1,2),8)=0;
+                    output(points(4,1),points(4,2),1)=0;
                 end
             end
         end
