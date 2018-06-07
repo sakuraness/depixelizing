@@ -8,6 +8,6 @@ each number represent a neighbor
 4 c 5
 6 7 8
 %}
-input=imread('testcase/test4.png');
+input=imread('testcase/test1.png');
 %result is save in "test" variable
-test=step_one(input);  
+test=step_one(input); 

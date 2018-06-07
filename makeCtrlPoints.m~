@@ -1,0 +1,12 @@
+pixelConnect = test;
+[row, col, dir] = size(pixelConnect);
+
+for i = 1:(row-1)
+    for j = 1:(col-1)
+        % for every 2*2 original pixels
+        
+        type = defineType(pixelConnect(i:(i+1),j:(j+1) , :));
+        
+        
+    end
+end
