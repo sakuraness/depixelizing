@@ -1,0 +1,33 @@
+function resultImg = scaling(px, py, ctrlPoints, pixelConnect, input)
+
+ix = floor(px); iy = floor(py); %inputX inputY
+
+lefttopCP = ctrlPoints(ix-1, iy-1, :);
+righttopCP = ctrlPoints(ix, iy-1, :);
+leftbotCP = ctrlPoints(ix-1, iy, :);
+rightbotCP = ctrlPoints(ix, iy, :);
+
+
+borders = []; % 2 points denote a border
+
+% top border
+if (~pixelConnect(ix, iy, 2))
+    % may set border
+    if (lefttopCP(1) == 0 || righttopCP(1) == 0)
+        % do not set
+    elseif (lefttopCP(1) == 1 && righttopCP(1) == 1)
+        % simple border
+        borders = [borders; lefttopCP(2), lefttopCP(3); righttopCP(2), righttopCP(3)];
+    else
+        % find the center point of 2
+        p1 = 
+        if (lefttopCP(2) > lefttopCP(4))
+            
+        end
+    end
+end
+    
+    
+    
+end
+
