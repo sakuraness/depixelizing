@@ -22,11 +22,11 @@ for k = 1:numBorder
         end
         
         for i = lp1(1):lp2(1)
-            ratio = (i-lp1(1))/(lp2(1)-lp1(1))
+            ratio = (i-lp1(1))/(lp2(1)-lp1(1));
             j = round(lp2(2)*ratio + lp1(2)*(1-ratio));
             
-            if (i*j == 0) break; end
-                
+            if (i<0 || j<0) break; end
+            
             supImg(i, j, :) = [200 200 50];
         end
     else
@@ -40,7 +40,7 @@ for k = 1:numBorder
             ratio = (j-lp1(2))/(lp2(2)-lp1(2));
             i = round(lp2(1)*ratio + lp1(1)*(1-ratio));
             
-            if (i*j == 0) break; end
+            if (i<0 || j<0) break; end
             
             supImg(i, j, :) = [200 200 50];
         end
