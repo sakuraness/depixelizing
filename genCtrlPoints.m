@@ -23,7 +23,7 @@ function ctrlPoints = genCtrlPoints(blocks, i, j)
         ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 8];
 
     else
-        ctrlPoints = [5.0 0.0 0.0 0.0 0.0];
+        ctrlPoints = [5.0 0.0 0.0 0.0 0.0 0.0];
     end
 
 end

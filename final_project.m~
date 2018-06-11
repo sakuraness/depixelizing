@@ -12,7 +12,6 @@ clear;
 
 mul = 16; % multiple times
 
-% load the input and extend it
 input = imread('testcase/test2.png');
 input = extend(input);
 
@@ -32,6 +31,6 @@ showCP;
 resultImg = restrict(resultImg, mul);
 supImg = restrict(supImg, mul);
 
-% output the result
+% output the
 imwrite(resultImg, 'output/output2.png');
 imwrite(supImg, 'output/sup2.png');

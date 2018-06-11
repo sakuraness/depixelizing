@@ -1,4 +1,3 @@
-pixelConnect = test;
 [row, col, dir] = size(pixelConnect);
 
 for i = 1:(row-1)
