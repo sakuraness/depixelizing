@@ -1,84 +1,117 @@
-function resultImg = scaling(px, py, ctrlPoints, pixelConnect, input)
+function [resultImg, vec] = scaling(px, py, borders, input)
 
-ix = floor(px); iy = floor(py); %inputX inputY
+%inputX inputY
+ix = floor(px); iy = floor(py);
+[row, col, d] = size(input);
+row = row-1; col = col-1;
+%[ix, iy]
 
-lefttopCP = ctrlPoints(ix-1, iy-1, :);
-righttopCP = ctrlPoints(ix, iy-1, :);
-leftbotCP = ctrlPoints(ix-1, iy, :);
-rightbotCP = ctrlPoints(ix, iy, :);
 
+%% borders set
+% neighbor 4 original pixel
+[points, twos] = size(borders);
+numBorder = points/2;
 
-borders = []; % 2 points denote a border
+%% pixel filling
 
-% top border
-if (~pixelConnect(ix, iy, 2))
-    % may set border
-    if (lefttopCP(1) == 0 || righttopCP(1) == 0)
-        % do not set
-    elseif (lefttopCP(1) == 1 && righttopCP(1) == 1)
-        % simple border
-        borders = [borders; lefttopCP(2), lefttopCP(3); righttopCP(2), righttopCP(3)];
-    else
-        % find the center point of 2
-        if (lefttopCP(1) == 2)
-            if (lefttopCP(2) > lefttopCP(4))
-                p1 = [lefttopCP(2), lefttopCP(3)];
-            else
-                p1 = [lefttopCP(4), lefttopCP(5)];
+srcX = floor(px-0.5);
+srcY = floor(py-0.5);
+six = srcX+0.5;
+siy = srcY+0.5;
+
+%from = [px, py]
+%target = [six, siy]
+
+% lefttop
+if (srcX>=1 && srcY>=1 && srcX<=(row+1) && srcY<=(col+1))
+    allow = true;
+    p1 = [six, siy]; p2 = [px, py];
+    if (p1(1) ~= p2(1) || p1(2) ~= p2(2))
+        for i = 1:numBorder
+            p3 = [borders(i*2-1, :)];
+            p4 = [borders(i*2, :)];
+            if (isCross(p1, p2, p3, p4))
+                allow = false;
+                break;
             end
-        else
-            p1 = [lefttopCP(2), lefttopCP(3)];
         end
-        
-        if (righttopCP(1) == 2)
-            if (righttopCP(2) < righttopCP(4))
-                p2 = [righttopCP(2), righttopCP(3)];
-            else
-                p2 = [righttopCP(4), righttopCP(5)];
-            end
-        else
-            p2 = [righttopCP(2), righttopCP(3)];
-        end
-        
-        borders = [borders; p1; p2];
+    end
+
+    if (allow)
+        resultImg = input(srcX, srcY, :);
+        vec = [0 0 0];
+        return;
     end
 end
 
-% bot border
-if (~pixelConnect(ix, iy, 7))
-    % may set border
-    if (leftbotCP(1) == 0 || rightbotCP(1) == 0)
-        % do not set
-    elseif (leftbotCP(1) == 1 && rightbotCP(1) == 1)
-        % simple border
-        borders = [borders; leftbotCP(2), leftbotCP(3); rightbotCP(2), rightbotCP(3)];
-    else
-        % find the center point of 2
-        if (leftbotCP(1) == 2)
-            if (leftbotCP(2) > leftbotCP(4))
-                p1 = [leftbotCP(2), leftbotCP(3)];
-            else
-                p1 = [leftbotCP(4), leftbotCP(5)];
+% righttop
+if (srcX>=1 && (srcY+1)>=1 && srcX<=(row+1) && (srcY+1)<=(col+1))
+    p1 = [six, siy+1]; p2 = [px, py];
+    allow = true;
+    if (p1(1) ~= p2(1) || p1(2) ~= p2(2))
+        for i = 1:numBorder
+            p3 = [borders(i*2-1, :)];
+            p4 = [borders(i*2, :)];
+            if (isCross(p1, p2, p3, p4))
+                allow = false;
+                break;
             end
-        else
-            p1 = [leftbotCP(2), leftbotCP(3)];
         end
-        
-        if (rightbotCP(1) == 2)
-            if (rightbotCP(2) < rightbotCP(4))
-                p2 = [rightbotCP(2), rightbotCP(3)];
-            else
-                p2 = [rightbotCP(4), rightbotCP(5)];
-            end
-        else
-            p2 = [rightbotCP(2), rightbotCP(3)];
-        end
-        
-        borders = [borders; p1; p2];
+    end
+
+    if (allow && (iy+1)<=(col+1))
+        resultImg = input(srcX, srcY+1, :);
+        vec = [255 255 255];
+        return;
     end
 end
-    
-    
-    
+
+% leftbot
+if ((srcX+1)>=1 && srcY>=1 && (srcX+1)<=(row+1) && srcY<=(col+1))
+    p1 = [six+1, siy]; p2 = [px, py];
+    allow = true;
+    if (p1(1) ~= p2(1) || p1(2) ~= p2(2))
+        for i = 1:numBorder
+            p3 = [borders(i*2-1, :)];
+            p4 = [borders(i*2, :)];
+            if (isCross(p1, p2, p3, p4))
+                allow = false;
+                break;
+            end
+        end
+    end
+
+    if (allow)
+        resultImg = input(srcX+1, srcY, :);
+        vec = [255 255 0];
+        return;
+    end
+end
+
+% rightbot
+if ((srcX+1)>=1 && (srcY+1)>=1 && (srcX+1)<=(row+1) && (srcY+1)<=(col+1))
+    allow = true;
+    p1 = [six+1, siy+1]; p2 = [px, py];
+    if (p1(1) ~= p2(1) || p1(2) ~= p2(2))
+        for i = 1:numBorder
+            p3 = [borders(i*2-1, :)];
+            p4 = [borders(i*2, :)];
+            if (isCross(p1, p2, p3, p4))
+                allow = false;
+                break;
+            end
+        end
+    end
+
+    if (allow)
+        resultImg = input(srcX+1, srcY+1, :);
+        vec = [0 0 255];
+        return;
+    end
+end
+
+resultImg = input(ix, iy, :);
+vec = [120 120 120];
+
 end
 

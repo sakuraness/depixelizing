@@ -1,27 +1,14 @@
-function result = isCross(p1, p2, p3, p4)
+function cross = isCross(a,b,c,d)
+    p1 = b(2)-a(2);
+    p2 = a(1)-b(1);
+    p3 = b(1)*a(2)-a(1)*b(2);
 
-% mx+y=c
-m1 = -(p1(1)-p2(1))/(p1(2)-p2(2));
-m2 = -(p3(1)-p4(1))/(p3(2)-p4(2));
-c1 = m1*p1(1) + p1(2);
-c2 = m2*p3(1) + p3(2);
+    q1 = d(2)-c(2);
+    q2 = c(1)-d(1);
+    q3 = d(1)*c(2)-c(1)*d(2);
 
-% find cross point
-A = [m1, 1; m2, 1];
-C = [c1; c2];
-x = A\C; % x = [x; y]
-
-% check the point is on the lines
-rx1 = (x(1)-p1(1))*(x(1)-p2(1));
-rx2 = (x(1)-p3(1))*(x(1)-p4(1));
-ry1 = (x(2)-p1(2))*(x(2)-p2(2));
-ry2 = (x(2)-p3(2))*(x(2)-p4(2));
-
-if ((rx1<0)&&(rx2<0)&&(ry1<0)&&(ry2<0))
-    result = true;
-else
-    result = false;
+    sign1 = ( p1*c(1)+p2*c(2)+p3 ) * ( p1*d(1)+p2*d(2)+p3 );
+    sign2 = ( q1*a(1)+q2*a(2)+q3 ) * ( q1*b(1)+q2*b(2)+q3 );
+    % cross = sign1*sign2<0; ­×§ï¦¹¦æ
+    cross = (sign1 <= 0 && sign2 <= 0);
 end
-
-end
-

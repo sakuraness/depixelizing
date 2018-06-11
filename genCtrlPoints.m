@@ -1,26 +1,26 @@
 function ctrlPoints = genCtrlPoints(blocks, i, j)
 
     if (blocks(1, 1, 5) & blocks(1, 1, 7) & blocks(1, 1, 8)) %same
-        ctrlPoints = [0.0 0.0 0.0 0.0 0.0];
+        ctrlPoints = [0.0 0.0 0.0 0.0 0.0 0.0];
         
     elseif (blocks(1, 1, 8) & ~blocks(1, 1, 5) & ~blocks(1, 1, 7)) %pos-cross \
-        ctrlPoints = [2.0 (i+1.25) (j+0.75) (i+0.75) (j+1.25)];
+        ctrlPoints = [2.0 (i+1.25) (j+0.75) (i+0.75) (j+1.25) 1];
     elseif (blocks(1, 2, 6) & ~blocks(1, 2, 4) & ~blocks(1, 2, 7)) %neg-cross /
-        ctrlPoints = [2.0 (i+0.75) (j+0.75) (i+1.25) (j+1.25)];
+        ctrlPoints = [2.0 (i+0.75) (j+0.75) (i+1.25) (j+1.25) 2];
 
     elseif (blocks(1, 1, 5) & blocks(1, 1, 7) & ~blocks(1, 1, 8)) %right-bottom-corner
-        ctrlPoints = [1.0 (i+1.25) (j+1.25) 0.0 0.0];
+        ctrlPoints = [1.0 (i+1.25) (j+1.25) 0.0 0.0 3];
     elseif (blocks(1, 2, 4) & blocks(1, 2, 7) & ~blocks(1, 2, 6)) %left-bottom-corner
-        ctrlPoints = [1.0 (i+0.75) (j+1.25) 0.0 0.0];
+        ctrlPoints = [1.0 (i+1.25) (j+0.75) 0.0 0.0 4];
     elseif (blocks(2, 1, 2) & blocks(2, 1, 5) & ~blocks(2, 1, 3)) %right-top-corner
-        ctrlPoints = [1.0 (i+1.25) (j+0.75) 0.0 0.0];
+        ctrlPoints = [1.0 (i+0.75) (j+1.25) 0.0 0.0 5];
     elseif (blocks(2, 2, 2) & blocks(2, 2, 4) & ~blocks(2, 2, 1)) %left-top-corner
-        ctrlPoints = [1.0 (i+0.75) (j+0.75) 0.0 0.0];
+        ctrlPoints = [1.0 (i+0.75) (j+0.75) 0.0 0.0 6];
         
     elseif (blocks(1, 1, 7) & blocks(1, 2, 7) & ~blocks(1, 1, 5) & ~blocks(2, 1, 5)) %vertical-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0];
+        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 7];
     elseif (~blocks(1, 1, 7) & ~blocks(1, 2, 7) & blocks(1, 1, 5) & blocks(2, 1, 5)) %horizontal-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0];
+        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 8];
 
     else
         ctrlPoints = [5.0 0.0 0.0 0.0 0.0];
