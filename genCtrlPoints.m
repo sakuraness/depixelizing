@@ -20,16 +20,16 @@ function ctrlPoints = genCtrlPoints(blocks, i, j)
     elseif (blocks(1, 1, 7) && blocks(1, 2, 7) && ~blocks(1, 1, 5)) % 2-vertical-side
         ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 7];
     elseif (blocks(1, 1, 7) && ~blocks(1, 2, 7)) % left-vertical-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 8];
+        ctrlPoints = [1.0 (i+1) (j+1.25) 0.0 0.0 8];
     elseif (~blocks(1, 1, 7) && blocks(1, 2, 7)) % right-vertical-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 9];
+        ctrlPoints = [1.0 (i+1) (j+0.75) 0.0 0.0 9];
         
     elseif (blocks(1, 1, 5) & blocks(2, 1, 5) & ~blocks(1, 1, 7)) % 2-horizontal-side
         ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 10];
     elseif (blocks(1, 1, 5) & ~blocks(2, 1, 5)) % top-horizontal-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 11];
+        ctrlPoints = [1.0 (i+1.25) (j+1) 0.0 0.0 11];
     elseif (~blocks(1, 1, 5) & blocks(2, 1, 5)) % bot-horizontal-side
-        ctrlPoints = [1.0 (i+1) (j+1) 0.0 0.0 12];
+        ctrlPoints = [1.0 (i+0.75) (j+1) 0.0 0.0 12];
 
     else
         ctrlPoints = [5.0 0.0 0.0 0.0 0.0 0];

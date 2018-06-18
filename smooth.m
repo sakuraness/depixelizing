@@ -5,7 +5,7 @@ function [outputImg, smImg] = smooth(inputImg)
 outputImg = inputImg;
 
 for t = 1:10 % smooth width
-    
+    t
     for i = 1:r
         for j = 1:l
             yuv(i, j, :) = rgb2yuv(outputImg(i, j, :));

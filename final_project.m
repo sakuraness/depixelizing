@@ -13,7 +13,7 @@ clear;
 mul = 16; % multiple times
 
 % load the input and extend it
-input = imread('testcase/test9.png');
+input = imread('testcase/test10.png');
 input = extend(input);
 
 % connection of input pixels about their neighbors
@@ -36,6 +36,6 @@ supImg = restrict(supImg, mul);
 smImg = restrict(smImg, mul);
 
 % output the result
-imwrite(resultImg, 'output/output9.png');
-imwrite(supImg, 'output/sup9.png');
-imwrite(smImg, 'output/sm9.png');
+imwrite(resultImg, 'output/output10.png');
+imwrite(supImg, 'output/sup10.png');
+imwrite(smImg, 'output/sm10.png');
