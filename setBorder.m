@@ -22,6 +22,7 @@ for i = 1:r
                     borders = [borders; curCP(2), curCP(3); botCP(4), botCP(5)];
                 elseif (botCP(6) == 2)
                     borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
+                    % borders = [borders; curCP(4), curCP(5); botCP(4), botCP(5)];
                 else
                     borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
                 end
@@ -30,6 +31,7 @@ for i = 1:r
                 % bot link
                 if (botCP(6) == 1)
                     borders = [borders; curCP(4), curCP(5); botCP(4), botCP(5)];
+                    % borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
                 elseif (botCP(6) == 2)
                     borders = [borders; curCP(4), curCP(5); botCP(2), botCP(3)];
                 else
@@ -62,7 +64,7 @@ for i = 1:r
             elseif (curCP(6) == 6) %left-top-corner
                 % no any link
 
-            elseif (curCP(6) == 7) %vertical-side
+            elseif (curCP(6) >= 7 && curCP(6) <= 9) % all-vertical-side
                 % bot link
                 if (botCP(6) == 1)
                     borders = [borders; curCP(2), curCP(3); botCP(4), botCP(5)];
@@ -72,8 +74,15 @@ for i = 1:r
                     borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
                 end
 
-            elseif (curCP(6) == 8) %horizontal-side
-                % no bot link
+            elseif (curCP(6) == 11) % top-horizontal-side
+                % bot link
+                if (botCP(6) == 1)
+                    borders = [borders; curCP(2), curCP(3); botCP(4), botCP(5)];
+                elseif (botCP(6) == 2)
+                    borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
+                else
+                    borders = [borders; curCP(2), curCP(3); botCP(2), botCP(3)];
+                end
                 
             end
             
@@ -134,10 +143,7 @@ for i = 1:r
             elseif (curCP(6) == 6) %left-top-corner
                 % no any link
 
-            elseif (curCP(6) == 7) %vertical-side
-                % no right link
-
-            elseif (curCP(6) == 8) %horizontal-side
+            elseif (curCP(6) == 8) % left-vertical-side
                 % right link
                 if (rightCP(6) == 1)
                     borders = [borders; curCP(2), curCP(3); rightCP(2), rightCP(3)];
@@ -147,8 +153,16 @@ for i = 1:r
                     borders = [borders; curCP(2), curCP(3); rightCP(2), rightCP(3)];
                 end
 
-                % no bot link
-
+            elseif (curCP(6) >= 10 && curCP(6) <= 12) % all-horizontal-side
+                % right link
+                if (rightCP(6) == 1)
+                    borders = [borders; curCP(2), curCP(3); rightCP(2), rightCP(3)];
+                elseif (rightCP(6) == 2)
+                    borders = [borders; curCP(2), curCP(3); rightCP(2), rightCP(3)];
+                else
+                    borders = [borders; curCP(2), curCP(3); rightCP(2), rightCP(3)];
+                end
+                
             end
             
         end
