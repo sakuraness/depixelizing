@@ -28,10 +28,14 @@ multiple;
 blockLine;
 showCP;
 
+[resultImg, smImg] = smooth(resultImg);
+
 % cut off the border
 resultImg = restrict(resultImg, mul);
 supImg = restrict(supImg, mul);
+smImg = restrict(smImg, mul);
 
 % output the result
 imwrite(resultImg, 'output/output9.png');
 imwrite(supImg, 'output/sup9.png');
+imwrite(smImg, 'output/sm9.png');
